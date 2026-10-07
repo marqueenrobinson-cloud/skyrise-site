@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Skyrise Launch</title>
+<meta name="description" content="Launch your own Solana coin in 4 simple steps. Fixed supply, locked liquidity, fees stated up front.">
+<meta property="og:title" content="Skyrise Launch">
+<meta property="og:description" content="Launch your own Solana coin in 4 simple steps.">
+<meta property="og:image" content="https://raw.githubusercontent.com/marqueenrobinson-cloud/launcher-assets/main/logo.png">
+<meta name="theme-color" content="#1f6feb">
+<link rel="icon" href="https://raw.githubusercontent.com/marqueenrobinson-cloud/launcher-assets/main/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700&family=Figtree:wght@400;500;600&display=swap">
+<style>
+:root {
+  color-scheme: light;
+  --bg: #ffffff; --panel: #f1f6ff; --ink: #0b1f3a; --muted: #475d7a;
+  --blue: #1f6feb; --blue-deep: #0b4fc4; --on-blue: #ffffff; --line: #d6e3f7;
+  --display: "Sora", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --body: "Figtree", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --bg: #09131f; --panel: #0e1d33; --ink: #eaf2ff; --muted: #9fb4d0;
+    --blue: #5b9dff; --blue-deep: #8db9ff; --on-blue: #09131f; --line: #1d3250;
+  }
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 17px; line-height: 1.55; padding: 0 20px 56px; }
+.wrap { max-width: 880px; margin-inline: auto; }
+a { color: var(--blue-deep); }
+:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; border-radius: 6px; }
+header.top { display: flex; align-items: center; gap: 12px; padding-block: 22px; }
+header.top img { width: 36px; height: 36px; border-radius: 50%; display: block; }
+header.top span { font-family: var(--display); font-weight: 700; font-size: 18px; letter-spacing: -0.01em; }
+.hero { display: flex; align-items: center; justify-content: space-between; gap: 32px; padding-block: 36px 52px; }
+.hero > div { min-width: 0; flex: 1 1 auto; }
+.eyebrow { font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--blue-deep); margin: 0 0 14px; }
+h1 { font-family: var(--display); font-weight: 700; font-size: clamp(34px, 7vw, 58px); line-height: 1.05; letter-spacing: -0.03em; margin: 0 0 18px; text-wrap: balance; }
+.lede { font-size: 19px; color: var(--muted); max-width: 34em; margin: 0 0 26px; }
+.hero img.big { width: clamp(120px, 24vw, 230px); height: auto; aspect-ratio: 1; border-radius: 50%; flex: 0 0 auto; box-shadow: 0 18px 50px -18px rgba(31,111,235,0.55); }
+.btns { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn { display: inline-block; font-weight: 600; font-size: 16px; text-decoration: none; padding: 13px 20px; border-radius: 10px; border: 1.5px solid var(--blue); }
+.btn.primary { background: var(--blue); color: var(--on-blue); }
+.btn.ghost { color: var(--blue-deep); background: transparent; }
+h2 { font-family: var(--display); font-weight: 700; font-size: clamp(26px, 4.5vw, 36px); letter-spacing: -0.02em; line-height: 1.15; margin: 0 0 8px; text-wrap: balance; }
+.sub { color: var(--muted); margin: 0 0 28px; }
+ol.steps { list-style: none; margin: 0; padding: 0; border-top: 1.5px solid var(--line); }
+ol.steps li { display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 4px 16px; padding-block: 24px; border-bottom: 1.5px solid var(--line); }
+.num { font-family: var(--display); font-weight: 700; font-size: 40px; line-height: 1; color: var(--blue); grid-row: span 2; }
+ol.steps h3 { font-family: var(--display); font-weight: 700; font-size: 21px; letter-spacing: -0.01em; margin: 0; }
+ol.steps p { margin: 0; color: var(--muted); max-width: 38em; }
+section { padding-block: 56px 0; }
+.trade { display: grid; grid-template-columns: minmax(0, 380px) minmax(0, 1fr); gap: 24px; align-items: start; }
+.box { background: var(--panel); border-radius: 16px; padding: 16px; min-width: 0; }
+.box h3 { font-family: var(--display); font-size: 16px; margin: 0 0 12px; }
+#jupiter-plugin { min-height: 420px; display: flex; justify-content: center; }
+.chart { width: 100%; height: 520px; border: 0; border-radius: 10px; display: block; background: var(--bg); }
+.fallback { color: var(--muted); font-size: 14.5px; margin: 12px 0 0; }
+.facts { background: var(--panel); border-radius: 16px; padding: 28px 24px; }
+.facts dl { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 18px 24px; margin: 24px 0 0; }
+.facts dt { font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.facts dd { margin: 2px 0 0; font-weight: 600; }
+.addr { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 8px; }
+.addr code { font-family: var(--mono); font-size: 14px; background: var(--bg); border: 1.5px solid var(--line); border-radius: 8px; padding: 10px 12px; overflow-wrap: anywhere; min-width: 0; flex: 1 1 280px; user-select: all; }
+.addr button { font: inherit; font-weight: 600; font-size: 15px; cursor: pointer; color: var(--on-blue); background: var(--blue); border: 0; border-radius: 8px; padding: 10px 16px; }
+.links { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 22px; font-weight: 600; }
+.note { color: var(--muted); font-size: 14.5px; margin: 22px 0 0; max-width: 46em; }
+footer { padding-block: 44px 0; color: var(--muted); font-size: 14.5px; border-top: 1.5px solid var(--line); margin-top: 56px; }
+footer p { margin: 0 0 8px; max-width: 46em; }
+@media (max-width: 760px) { .trade { grid-template-columns: minmax(0, 1fr); } .chart { height: 440px; } }
+@media (max-width: 560px) {
+  body { font-size: 16px; }
+  .hero { flex-direction: column-reverse; align-items: flex-start; gap: 22px; padding-block: 18px 40px; }
+  .hero img.big { width: 120px; }
+  ol.steps li { grid-template-columns: 44px minmax(0, 1fr); gap: 4px 12px; }
+  .num { font-size: 32px; }
+  .facts { padding: 22px 18px; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <img src="https://raw.githubusercontent.com/marqueenrobinson-cloud/launcher-assets/main/logo.png" alt="" width="36" height="36">
+    <span>Skyrise Launch</span>
+  </header>
+
+  <main>
+    <div class="hero">
+      <div>
+        <p class="eyebrow">Solana coin launcher</p>
+        <h1>Launch your own coin in 4 simple steps.</h1>
+        <p class="lede">Fixed supply, locked liquidity and fees stated up front. Built to run from a phone.</p>
+        <div class="btns">
+          <a class="btn primary" href="#trade">Trade SKYRISE</a>
+          <a class="btn ghost" href="#steps">See the 4 steps</a>
+        </div>
+      </div>
+      <img class="big" src="https://raw.githubusercontent.com/marqueenrobinson-cloud/launcher-assets/main/logo.png" alt="Skyrise Launch logo: two white arrows curving up and to the right inside a blue circle" width="230" height="230">
+    </div>
+
+    <section id="steps" style="padding-block-start:8px">
+      <h2>From idea to trading</h2>
+      <p class="sub">The same four steps every time.</p>
+      <ol class="steps">
+        <li><span class="num" aria-hidden="true">1</span><h3>Name it</h3><p>Pick a name, a ticker and a logo. They are written onto the coin itself and locked, so nobody can swap them later.</p></li>
+        <li><span class="num" aria-hidden="true">2</span><h3>Set the supply</h3><p>Your coins are created once. Then minting is switched off for good, so no one can ever make more.</p></li>
+        <li><span class="num" aria-hidden="true">3</span><h3>Choose the fee</h3><p>Pick 1%, 3% or 5%. It is charged on every buy and every sell, it is set when the coin is made, and it can never be changed.</p></li>
+        <li><span class="num" aria-hidden="true">4</span><h3>Open trading</h3><p>Your coins go into a trading pool and the liquidity is locked permanently. An opening fee starts high and falls over the first minutes to slow down bots.</p></li>
+      </ol>
+    </section>
+
+    <section id="trade">
+      <h2>Trade SKYRISE</h2>
+      <p class="sub">The first coin made with Skyrise Launch. Swap here or watch the live chart.</p>
+      <div class="trade">
+        <div class="box">
+          <h3>Swap</h3>
+          <div id="jupiter-plugin"></div>
+          <p class="fallback" id="swap-fallback" hidden>The swap box did not load. <a href="https://jup.ag/swap/SOL-KdsfFPzTbYwjXzoB9vQaKzv2dukfVtEiR3nNL2miFsr" target="_blank" rel="noopener">Swap on Jupiter</a> instead.</p>
+        </div>
+        <div class="box">
+          <h3>Live chart</h3>
+          <iframe class="chart" id="chart" title="SKYRISE live chart on Dexscreener" loading="lazy" referrerpolicy="no-referrer"></iframe>
+          <p class="fallback"><a href="https://dexscreener.com/solana/9VM4oAg2eTKAPD9UWUUJVHxuQyJJtWCcrceDtDXaC2uQ" target="_blank" rel="noopener">Open the chart on Dexscreener</a></p>
+        </div>
+      </div>
+    </section>
+
+    <section id="first-coin">
+      <div class="facts">
+        <p class="eyebrow">Official coin</p>
+        <h2>SKYRISE</h2>
+        <p class="sub" style="margin:0">Check the address before you do anything with it.</p>
+        <div class="addr">
+          <code id="ca">KdsfFPzTbYwjXzoB9vQaKzv2dukfVtEiR3nNL2miFsr</code>
+          <button type="button" id="copy">Copy address</button>
+        </div>
+        <dl>
+          <div><dt>Supply</dt><dd>1,000,000,000, fixed</dd></div>
+          <div><dt>Minting</dt><dd>Switched off forever</dd></div>
+          <div><dt>Coin fee</dt><dd>1% on every buy and every sell, set once, paid to the platform wallet</dd></div>
+          <div><dt>Pool fee</dt><dd>Starts at 50% and falls to 1% in the first 3 minutes</dd></div>
+          <div><dt>Liquidity</dt><dd>Permanently locked</dd></div>
+          <div><dt>Name and logo</dt><dd>Locked on the coin</dd></div>
+          <div><dt>Freeze power</dt><dd>None</dd></div>
+        </dl>
+        <div class="links">
+          <a href="https://app.meteora.ag/dammv2/9VM4oAg2eTKAPD9UWUUJVHxuQyJJtWCcrceDtDXaC2uQ" target="_blank" rel="noopener">Pool on Meteora</a>
+          <a href="https://explorer.solana.com/address/KdsfFPzTbYwjXzoB9vQaKzv2dukfVtEiR3nNL2miFsr" target="_blank" rel="noopener">View the coin</a>
+        </div>
+        <p class="note">Another, older coin made while this launcher was being tested has no name on it and is not SKYRISE. The address above is the only official one.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Skyrise Launch is early. Coins can lose all of their value. Nothing here is financial advice, so do your own research.</p>
+    <p>skyriselaunch.fun</p>
+  </footer>
+</div>
+
+<script src="https://plugin.jup.ag/plugin-v1.js" async></script>
+<script>
+(function () {
+  var MINT = 'KdsfFPzTbYwjXzoB9vQaKzv2dukfVtEiR3nNL2miFsr';
+  var POOL = '9VM4oAg2eTKAPD9UWUUJVHxuQyJJtWCcrceDtDXaC2uQ';
+  var SOL = 'So11111111111111111111111111111111111111112';
+
+  // Live chart, matched to the visitor's light or dark setting
+  var dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  document.getElementById('chart').src =
+    'https://dexscreener.com/solana/' + POOL + '?embed=1&theme=' + (dark ? 'dark' : 'light') + '&trades=0&info=0';
+
+  // Swap box (Jupiter), retried until its script has loaded
+  var tries = 0;
+  (function start() {
+    if (window.Jupiter && window.Jupiter.init) {
+      window.Jupiter.init({
+        displayMode: 'integrated',
+        integratedTargetId: 'jupiter-plugin',
+        formProps: { initialInputMint: SOL, initialOutputMint: MINT, fixedMint: MINT }
+      });
+    } else if (tries++ < 40) {
+      setTimeout(start, 250);
+    } else {
+      document.getElementById('swap-fallback').hidden = false;
+    }
+  })();
+
+  // Copy button
+  var btn = document.getElementById('copy');
+  var code = document.getElementById('ca');
+  btn.addEventListener('click', function () {
+    var done = function (ok) {
+      btn.textContent = ok ? 'Copied' : 'Press and hold to copy';
+      if (!ok) { try { var r = document.createRange(); r.selectNodeContents(code); var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); } catch (e) {} }
+      setTimeout(function () { btn.textContent = 'Copy address'; }, 2200);
+    };
+    try { navigator.clipboard.writeText(code.textContent.trim()).then(function () { done(true); }, function () { done(false); }); }
+    catch (e) { done(false); }
+  });
+})();
+</script>
+</body>
+</html>
